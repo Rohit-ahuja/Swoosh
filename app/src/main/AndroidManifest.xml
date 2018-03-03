@@ -15,6 +15,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!--this intent filter is used to tell from where to launch the app u can add to activity from where u want-->
         </activity>
 
         <meta-data
