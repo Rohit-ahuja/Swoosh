@@ -2,6 +2,7 @@ package com.example.omsairam.swoosh.Controller
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Toast
 import com.example.omsairam.swoosh.Models.Player
@@ -13,9 +14,29 @@ class LeagueActivity : BaseActivity() {
 
    // var selectedLeague =""
     var player = Player( league = "", skill =  "")
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(EXTRA_PLAYER,player)
+        /*this fun is used to paas the previous state to the new state when
+        the previously prevailing state is detroyed on changing from potrait
+        to landscape.......
+        ? is used bcoz it can be nullable bcoz first time there wont be any saved
+        state and ? denotes nullability
+         */
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if(savedInstanceState != null){
+            player = savedInstanceState.getParcelable(EXTRA_PLAYER)
+            /* restore the saved state*/
+        }
     }
 
     fun onMensClicked(view: View){
